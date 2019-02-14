@@ -1,0 +1,9 @@
+---
+- name: Check if servier is running
+  hosts: 127.0.0.1
+  remote_user: cornel
+  tasks:
+    - name: test copy
+      copy:
+        src: /home/cornel/src/vueblocks/invoice-demo/front-end/dist/
+        dest: /home/cornel/src/vueblocks/invoice-demo/front-end-deploy               

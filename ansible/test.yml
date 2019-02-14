@@ -1,0 +1,10 @@
+---
+- name: Check if servier is running
+  hosts: demoapp
+  remote_user: mrgate
+  tasks:
+    - name: test connection
+      ping:
+      remote_user: mrgate
+      become: true
+      become_user: root

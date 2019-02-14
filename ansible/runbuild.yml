@@ -1,0 +1,7 @@
+---
+- name: run tests on demo-app
+  hosts: 127.0.0.1
+  connection: local
+  tasks:
+    - name: run yarn tests
+      command: yarn build

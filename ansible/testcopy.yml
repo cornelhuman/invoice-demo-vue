@@ -1,0 +1,14 @@
+---
+- name: Check if servier is running
+  hosts: demoapp
+  remote_user: mrgate
+  become: true
+  become_user: root
+  tasks:
+    - name: test connection
+      copy:
+        src: /home/cornel/src/vueblocks/invoice-demo/front-end/dist/
+        dest: /home/test/
+        owner: root
+        group: root
+        mode: 0644        
