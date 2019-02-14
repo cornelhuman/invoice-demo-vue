@@ -36,7 +36,7 @@
       args:
         chdir: /home/cornel/src/vueblocks/invoice-demo/front-end-deploy
     - name: deploy run git command
-      command: git push -u origin master
+      command: git push origin master
       args:
         chdir: /home/cornel/src/vueblocks/invoice-demo/front-end-deploy
 - name: Remote Step - pull from deploy
