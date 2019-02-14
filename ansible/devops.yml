@@ -32,7 +32,7 @@
       args:
         chdir: /home/cornel/src/vueblocks/invoice-demo/front-end-deploy
     - name: deploy git commit
-      command: git commit -m "latest changes"      
+      command: git commit -m "{{CommitMessage}}"      
       args:
         chdir: /home/cornel/src/vueblocks/invoice-demo/front-end-deploy
     - name: deploy run git command
