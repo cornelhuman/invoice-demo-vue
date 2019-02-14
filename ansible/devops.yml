@@ -23,6 +23,8 @@
       command: git push -u origin master
       args:
         chdir: /home/cornel/src/vueblocks/invoice-demo/front-end
+    - name: Build Deploy version
+      command: yarn build    
     - name: copy to local deploy
       copy:
         src: /home/cornel/src/vueblocks/invoice-demo/front-end/dist/
