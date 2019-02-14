@@ -1,0 +1,11 @@
+---
+- name: Check if servier is running
+  hosts: demoapp
+  remote_user: mrgate
+  become: true
+  become_user: root
+  tasks:
+    - name: git pull on server
+      command: git pull origin master
+      args:
+        chdir: /usr/src/pocketsme/websites/cornelhuman/demo-app    

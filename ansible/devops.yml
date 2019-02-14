@@ -1,0 +1,53 @@
+---
+- name: Local Steps
+  hosts: 127.0.0.1
+  vars:
+    projectfolder: /home/cornel/src/vueblocks/invoice-demo/front-end
+    deployfolder: /home/cornel/src/vueblocks/invoice-demo/front-end-deploy 
+  vars_prompt:
+    - name: "CommitMessage"
+      prompt: "What is the commit message?"
+  connection: local
+  tasks:
+    - name: Run test locally
+      command: yarn test:unit
+    - name: add new files
+      command: git add -A
+      args:
+        chdir: /home/cornel/src/vueblocks/invoice-demo/front-end
+    - name: git commit
+      command: git commit -m "{{CommitMessage}}"      
+      args:
+        chdir: /home/cornel/src/vueblocks/invoice-demo/front-end
+    - name: run git command
+      command: git push -u origin master
+      args:
+        chdir: /home/cornel/src/vueblocks/invoice-demo/front-end
+    - name: copy to local deploy
+      copy:
+        src: /home/cornel/src/vueblocks/invoice-demo/front-end/dist/
+        dest: /home/cornel/src/vueblocks/invoice-demo/front-end-deploy
+    - name: deploy add new files
+      command: git add -A
+      args:
+        chdir: /home/cornel/src/vueblocks/invoice-demo/front-end-deploy
+    - name: deploy git commit
+      command: git commit -m "latest changes"      
+      args:
+        chdir: /home/cornel/src/vueblocks/invoice-demo/front-end-deploy
+    - name: deploy run git command
+      command: git push -u origin master
+      args:
+        chdir: /home/cornel/src/vueblocks/invoice-demo/front-end-deploy
+- name: Remote Step - pull from deploy
+  hosts: demoapp
+  remote_user: mrgate
+  become: true
+  become_user: root
+  tasks:
+    - name: git pull on server
+      command: git pull origin master
+      args:
+        chdir: /usr/src/pocketsme/websites/cornelhuman/demo-app        
+
+    
