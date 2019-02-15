@@ -11,33 +11,33 @@
   tasks:
     - name: Run test locally
       command: yarn test:unit
-    - name: add new files
+    - name: Git (Src) add new files
       command: git add -A
       args:
         chdir: /home/cornel/src/vueblocks/invoice-demo/front-end
-    - name: git commit
+    - name: Git (Src) commit
       command: git commit -m "{{CommitMessage}}"      
       args:
         chdir: /home/cornel/src/vueblocks/invoice-demo/front-end
-    - name: run git command
+    - name: Git (Src) push
       command: git push -u origin master
       args:
         chdir: /home/cornel/src/vueblocks/invoice-demo/front-end
-    - name: Build Deploy version
+    - name: Build Distribution version
       command: yarn build    
-    - name: copy to local deploy
+    - name: Copy local dist files to dist repo
       copy:
         src: /home/cornel/src/vueblocks/invoice-demo/front-end/dist/
         dest: /home/cornel/src/vueblocks/invoice-demo/front-end-deploy
-    - name: deploy add new files
+    - name: Git (dist) add new files
       command: git add -A
       args:
         chdir: /home/cornel/src/vueblocks/invoice-demo/front-end-deploy
-    - name: deploy git commit
+    - name: Git (dist) commit
       command: git commit -m "{{CommitMessage}}"      
       args:
         chdir: /home/cornel/src/vueblocks/invoice-demo/front-end-deploy
-    - name: deploy run git command
+    - name: Git (dist) Push
       command: git push origin master
       args:
         chdir: /home/cornel/src/vueblocks/invoice-demo/front-end-deploy
@@ -47,7 +47,7 @@
   become: true
   become_user: root
   tasks:
-    - name: git pull on server
+    - name: Git (Server) pull
       command: git pull origin master
       args:
         chdir: /usr/src/pocketsme/websites/cornelhuman/demo-app        
