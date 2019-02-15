@@ -7,6 +7,7 @@
   vars_prompt:
     - name: "CommitMessage"
       prompt: "What is the commit message?"
+      private: no
   connection: local
   tasks:
     - name: Run test locally
