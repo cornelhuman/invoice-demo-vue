@@ -1,13 +1,13 @@
 <template>
-  <div contenteditable="true" ref="element" v-html="text"></div>
+  <div contenteditable="true" ref="element" v-text="amount" style="overflow-wrap:normal"></div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component
-export default class Editable extends Vue {
-  @Prop(String) public text!: string;
+export default class EditableAmount extends Vue {
+  @Prop(Number) public amount!: number;
 
   public $refs!: {
     element: HTMLFormElement;
@@ -16,7 +16,7 @@ export default class Editable extends Vue {
   public mounted() {
     // Set div value from text property
 
-    this.$refs.element.innerHTML = this.text;
+    this.$refs.element.innerHTML = this.amount.toFixed(2);
 
     // Check for Enter
     this.$refs.element.addEventListener("keydown", event => {
@@ -27,7 +27,10 @@ export default class Editable extends Vue {
 
     // On blur emit the new value
     this.$refs.element.addEventListener("blur", () => {
-      this.$emit("blur", this.$refs.element.innerText);
+      // We only want 2 decimal values for these amounts
+      const res = parseFloat(this.$refs.element.innerText);
+      // his.$refs.element.innerText = res;
+      this.$emit("blur", res);
     });
 
     // Emit focus event, we may want to know when the element receives focus
