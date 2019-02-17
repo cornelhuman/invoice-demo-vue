@@ -115,11 +115,29 @@ export default class InvoiceDetails extends Vue {
   };
 
   get invoicedata(): Invoice {
-    return this.invoice;
+    return this.Calculate(this.invoice);
+  }
+
+  private Calculate(val: Invoice) {
+    //console.log("Calculating Totals");
+    val.subtotal = 0;
+    val.items.forEach(item => {
+      item.total = item.quantity * item.price;
+      val.subtotal += item.total;
+    });
+    if (val.taxpercentage > 0) {
+      val.tax = (val.subtotal * val.taxpercentage) / 100;
+      val.total = val.subtotal + val.tax;
+    } else {
+      val.tax = 0;
+      val.total = val.subtotal;
+    }
+    return val;
   }
 
   @Watch("invoicedata", { deep: true })
   public watchContact(val: Invoice) {
+    //console.log("Invoice Data Changed");
     this.$emit("change", val);
   }
 

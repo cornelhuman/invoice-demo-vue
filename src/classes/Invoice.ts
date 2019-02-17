@@ -5,6 +5,7 @@ export default class Invoice {
     public invoicetitle: string;
     public subtotal: number;
     public tax: number;
+    public taxpercentage: number;
     public total: number;
     public items: InvoiceItem[];
 
@@ -17,6 +18,7 @@ export default class Invoice {
         this.subtotal = 0;
         this.tax = 0;
         this.total = 0;
+        this.taxpercentage = 15;
     }
 
     public addItem(id: number, category: string, description: string, quantity: number, price: number) {
