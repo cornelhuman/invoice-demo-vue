@@ -4,19 +4,25 @@ import router from './router';
 import store from './store';
 import firebase from "firebase";
 import BootstrapVue from 'bootstrap-vue';
+import FireBaseConfig from './FireBaseConfig';
 
 Vue.use(BootstrapVue);
 
-const config = {
-  apiKey: "AIzaSyAjB53WmwCMf3hOHeYQiG-ZpY26xCFQl3s",
-  authDomain: "skillsdemo-2e3d6.firebaseapp.com",
-  databaseURL: "https://skillsdemo-2e3d6.firebaseio.com",
-  projectId: "skillsdemo-2e3d6",
-  storageBucket: "skillsdemo-2e3d6.appspot.com",
-  messagingSenderId: "378463088653"
-};
+// Create a firebase config file with the following code
+/*export default class FireBaseConfig {
+  public data = {
+    apiKey: "apiKey",
+    authDomain: "authDomain",
+    databaseURL: "databaseURL",
+    projectId: "projectId",
+    storageBucket: "storageBucket",
+    messagingSenderId: "messagingSenderId"
+  };
+}*/
 
-firebase.initializeApp(config);
+
+const firebaseconfig = new FireBaseConfig();
+firebase.initializeApp(firebaseconfig.data);
 
 Vue.config.productionTip = false;
 
