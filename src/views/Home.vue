@@ -1,9 +1,7 @@
 <template>
   <div class="home">
-    <div class="pt-1 bg-primary">
-      <h1>Test Bootstrap</h1>
-    </div>
-    <input type="number" :value="amount">>
+    <Invoice></Invoice>
+    <!--<input type="number" :value="amount">>
     <button @click="logValue">Log Value</button>
     <div>
       <Editable @blur="mytext = $event" :text="mytext"></Editable>
@@ -16,7 +14,7 @@
       @change="logo = $event"
       :msg="uploadmsg"
       @progress="uploadmsg = $event"
-    ></DragDropLogo>
+    ></DragDropLogo>-->
   </div>
 </template>
 
@@ -26,12 +24,14 @@ import Component from "vue-class-component";
 import Editable from "@/components/Editable.vue"; // @ is an alias to /src
 import EditableAmount from "@/components/EditableAmount.vue"; // @ is an alias to /src
 import DragDropLogo from "@/components/DragDropLogo.vue"; // @ is an alias to /src
+import Invoice from "@/components/Invoice.vue"; // @ is an alias to /src
 
 @Component({
   components: {
     Editable,
     EditableAmount,
-    DragDropLogo
+    DragDropLogo,
+    Invoice
   }
 })
 export default class Home extends Vue {
