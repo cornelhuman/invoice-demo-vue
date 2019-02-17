@@ -8,6 +8,12 @@
     <div>
       <EditableAmount @blur="amount = $event" :amount="amount"></EditableAmount>
     </div>
+    <DragDropLogo
+      :src="logo"
+      @change="logo = $event"
+      :msg="uploadmsg"
+      @progress="uploadmsg = $event"
+    ></DragDropLogo>
   </div>
 </template>
 
@@ -16,16 +22,20 @@ import { Vue, Prop } from "vue-property-decorator";
 import Component from "vue-class-component";
 import Editable from "@/components/Editable.vue"; // @ is an alias to /src
 import EditableAmount from "@/components/EditableAmount.vue"; // @ is an alias to /src
+import DragDropLogo from "@/components/DragDropLogo.vue"; // @ is an alias to /src
 
 @Component({
   components: {
     Editable,
-    EditableAmount
+    EditableAmount,
+    DragDropLogo
   }
 })
 export default class Home extends Vue {
   public mytext: string = "Hello World";
   public amount: number = 100.15;
+  public logo: string = "";
+  public uploadmsg: string = "Drag and Drop Files Here";
 
   public test(val: string) {
     console.log(val);
