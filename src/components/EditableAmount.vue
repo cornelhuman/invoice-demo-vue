@@ -15,7 +15,7 @@ export default class EditableAmount extends Vue {
 
   public mounted() {
     // Set div value from text property
-
+    // Tofixed to trim initial values
     this.$refs.element.innerHTML = this.amount.toFixed(2);
 
     // Check for Enter
@@ -28,9 +28,9 @@ export default class EditableAmount extends Vue {
     // On blur emit the new value
     this.$refs.element.addEventListener("blur", () => {
       // We only want 2 decimal values for these amounts
-      const res = parseFloat(this.$refs.element.innerText);
+      const res = parseFloat(this.$refs.element.innerText).toFixed(2);
       // his.$refs.element.innerText = res;
-      this.$emit("blur", res);
+      this.$emit("blur", parseFloat(res));
     });
 
     // Emit focus event, we may want to know when the element receives focus
