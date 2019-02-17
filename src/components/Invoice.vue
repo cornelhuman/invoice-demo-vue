@@ -21,7 +21,7 @@ export default class Invoice extends Vue {
   public layoutType: string = "Standard";
 
   public $refs!: {
-    //fileform: HTMLFormElement;
+    // fileform: HTMLFormElement;
   };
 
   public mounted() {

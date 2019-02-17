@@ -40,4 +40,7 @@ export default class Editable extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+[contentEditable="true"]:empty:not(:focus):before {
+  content: attr(data-text);
+}
 </style>
