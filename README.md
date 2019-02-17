@@ -1,4 +1,4 @@
-# invoice-demo
+# Vue Single Page Invoice App
 
 ## Project setup
 ```
