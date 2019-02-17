@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="LogDetails">Log Details</button>
+    <!--<button @click="LogDetails">Log Details</button>-->
     <div class="border container my-1 rounded invoice-border">
       <div class="p-4">
         <div class="row" style="background-color:white">
@@ -67,7 +67,13 @@
         <InvoiceDetails :invoice="invoice" @change="invoice = $event"></InvoiceDetails>
 
         <hr>
-        <p>$bankdetails$</p>
+        <p class="text-left">
+          <Editable
+            data-text="Banking Details"
+            @blur="business.bankdetails = $event"
+            :text="business.bankdetails"
+          ></Editable>
+        </p>
       </div>
     </div>
   </div>

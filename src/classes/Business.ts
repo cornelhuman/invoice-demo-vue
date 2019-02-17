@@ -11,6 +11,7 @@ export default class Business {
     public invoicenumber: number;
     public taxname: string;
     public taxpercentage: number;
+    public bankdetails: string;
 
     constructor() {
         this.logo = "";
@@ -25,5 +26,6 @@ export default class Business {
         this.invoicenumber = 1000;
         this.taxname = "VAT";
         this.taxpercentage = 15;
+        this.bankdetails = "";
     }
 }
