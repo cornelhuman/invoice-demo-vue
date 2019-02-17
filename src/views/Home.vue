@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" ondrop="return false;">
     <Invoice></Invoice>
     <!--<input type="number" :value="amount">>
     <button @click="logValue">Log Value</button>

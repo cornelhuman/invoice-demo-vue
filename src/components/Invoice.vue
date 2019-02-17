@@ -1,5 +1,6 @@
 <template>
   <div>
+    <i>Click on text to start Editing</i>
     <div v-if="layoutType === 'Standard'">
       <InvoiceStandard></InvoiceStandard>
     </div>
