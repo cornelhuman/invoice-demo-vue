@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <div class="pt-1 bg-primary">
+      <h1>Test Bootstrap</h1>
+    </div>
     <input type="number" :value="amount">>
     <button @click="logValue">Log Value</button>
     <div>
