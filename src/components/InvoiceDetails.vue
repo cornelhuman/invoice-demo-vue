@@ -118,8 +118,22 @@ export default class InvoiceDetails extends Vue {
     return this.Calculate(this.invoice);
   }
 
+  @Watch("invoicedata", { deep: true })
+  public watchContact(val: Invoice) {
+    // console.log("Invoice Data Changed");
+    this.$emit("change", val);
+  }
+
+  public addInvoiceRow() {
+    console.log("Add a row to the invoice");
+  }
+
+  public removeRow() {
+    console.log("Remove Row");
+  }
+
   private Calculate(val: Invoice) {
-    //console.log("Calculating Totals");
+    // console.log("Calculating Totals");
     val.subtotal = 0;
     val.items.forEach(item => {
       item.total = item.quantity * item.price;
@@ -133,20 +147,6 @@ export default class InvoiceDetails extends Vue {
       val.total = val.subtotal;
     }
     return val;
-  }
-
-  @Watch("invoicedata", { deep: true })
-  public watchContact(val: Invoice) {
-    //console.log("Invoice Data Changed");
-    this.$emit("change", val);
-  }
-
-  public addInvoiceRow() {
-    console.log("Add a row to the invoice");
-  }
-
-  public removeRow() {
-    console.log("Remove Row");
   }
 }
 </script>
