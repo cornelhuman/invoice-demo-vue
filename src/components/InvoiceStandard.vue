@@ -63,11 +63,8 @@
         </div>
 
         <hr>
-        <div class="row" style="margin-bottom:15px">
-          <strong>Invoice Details</strong>
-        </div>
 
-        <p>$invoicedetails$</p>
+        <InvoiceDetails :invoice="invoice" @change="invoice = $event"></InvoiceDetails>
 
         <hr>
         <p>$bankdetails$</p>
@@ -84,6 +81,7 @@ import EditableAmount from "@/components/EditableAmount.vue";
 import DragDropLogo from "@/components/DragDropLogo.vue";
 import BusinessDetails from "@/components/BusinessDetails.vue";
 import ContactDetails from "@/components/ContactDetails.vue";
+import InvoiceDetails from "@/components/InvoiceDetails.vue";
 import { State, Action, Getter } from "vuex-class";
 import Business from "@/classes/Business.ts";
 import Contact from "@/classes/Contact.ts";
@@ -96,7 +94,8 @@ import InvoiceItem from "@/classes/InvoiceItem.ts";
     EditableAmount,
     DragDropLogo,
     BusinessDetails,
-    ContactDetails
+    ContactDetails,
+    InvoiceDetails
   }
 })
 export default class InvoiceStandard extends Vue {
@@ -108,7 +107,7 @@ export default class InvoiceStandard extends Vue {
   public business: Business = new Business();
 
   public contact: Contact = new Contact();
-  public invoice: Invoice | null = null;
+  public invoice: Invoice = new Invoice(1000, "New Invoice");
 
   public $refs!: {
     // fileform: HTMLFormElement;
@@ -120,12 +119,8 @@ export default class InvoiceStandard extends Vue {
 
   public created() {
     this.business.invoicenumber = 1000;
-    this.invoice = new Invoice(
-      this.business.invoicenumber,
-      "Invoice for hardware and software"
-    );
-    this.invoice.addItem("Hardware", "Dell XPS 17 Laptop", 1, 2300);
-    this.invoice.addItem("Software", "Windows 10 Profesional", 2, 450.45);
+    this.invoice.addItem(1, "Hardware", "Dell XPS 17 Laptop", 1, 2300);
+    this.invoice.addItem(2, "Software", "Windows 10 Profesional", 2, 450.45);
   }
 
   public mounted() {

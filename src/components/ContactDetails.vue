@@ -9,26 +9,42 @@
         ></editable>
       </div>
       <div style="margin-left:5px">
-        <editable data-text="LastName" :text="contact.lastname" @blur="contact.lastname = $event"></editable>
+        <editable
+          data-text="LastName"
+          :text="contactdata.lastname"
+          @blur="contactdata.lastname = $event"
+        ></editable>
       </div>
     </div>
     <div>
-      <editable data-text="Address1" :text="contact.address1" @blur="contact.address1 = $event"></editable>
+      <editable
+        data-text="Address1"
+        :text="contactdata.address1"
+        @blur="contactdata.address1 = $event"
+      ></editable>
     </div>
     <div>
-      <editable data-text="Address2" :text="contact.address2" @blur="contact.address2 = $event"></editable>
+      <editable
+        data-text="Address2"
+        :text="contactdata.address2"
+        @blur="contactdata.address2 = $event"
+      ></editable>
     </div>
     <div>
-      <editable data-text="Suburb / City" :text="contact.city" @blur="contact.city = $event"></editable>
+      <editable
+        data-text="Suburb / City"
+        :text="contactdata.city"
+        @blur="contactdata.city = $event"
+      ></editable>
     </div>
     <div>
-      <editable data-text="Zip" :text="contact.zip" @blur="contact.zip = $event"></editable>
+      <editable data-text="Zip" :text="contactdata.zip" @blur="contactdata.zip = $event"></editable>
     </div>
     <div>
-      <editable data-text="Cell / Tell" :text="contact.cell" @blur="contact.cell = $event"></editable>
+      <editable data-text="Cell / Tell" :text="contactdata.cell" @blur="contactdata.cell = $event"></editable>
     </div>
     <div>
-      <editable data-text="Email" :text="contact.email" @blur="contact.email = $event"></editable>
+      <editable data-text="Email" :text="contactdata.email" @blur="contactdata.email = $event"></editable>
     </div>
   </div>
 </template>

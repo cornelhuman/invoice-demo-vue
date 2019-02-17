@@ -1,5 +1,6 @@
 export default class InvoiceItem {
 
+    public id: number;
     public category: string;
     public description: string;
     public quantity: number;
@@ -7,11 +8,14 @@ export default class InvoiceItem {
     public total: number;
 
 
-    constructor(category: string, description: string, quantity: number, price: number) {
-        this.category = "";
-        this.description = "";
-        this.quantity = 1;
-        this.price = 0;
+    constructor(id: number, category: string, description: string, quantity: number, price: number) {
+        this.id = id;
+        this.category = category;
+        this.description = description;
+        this.quantity = quantity;
+        this.price = price;
         this.total = quantity * price;
+
+
     }
 }

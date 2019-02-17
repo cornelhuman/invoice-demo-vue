@@ -7,22 +7,26 @@
     ></Editable>
     <Editable
       data-text="Business Address 1"
-      @blur="business.address1 = $event"
-      :text="business.address1"
+      @blur="businessdata.address1 = $event"
+      :text="businessdata.address1"
     ></Editable>
     <Editable
       data-text="Business Address 2"
-      @blur="business.address2 = $event"
-      :text="business.address2"
+      @blur="businessdata.address2 = $event"
+      :text="businessdata.address2"
     ></Editable>
-    <Editable data-text="Business City" @blur="business.city = $event" :text="business.city"></Editable>
+    <Editable
+      data-text="Business City"
+      @blur="businessdata.city = $event"
+      :text="businessdata.city"
+    ></Editable>
     <Editable
       data-text="Business Country"
-      @blur="business.country = $event"
-      :text="business.country"
+      @blur="businessdata.country = $event"
+      :text="businessdata.country"
     ></Editable>
-    <Editable data-text="Business Zip" @blur="business.zip = $event" :text="business.zip"></Editable>
-    <Editable data-text="Business Tel" @blur="business.tel = $event" :text="business.tel"></Editable>
+    <Editable data-text="Business Zip" @blur="businessdata.zip = $event" :text="businessdata.zip"></Editable>
+    <Editable data-text="Business Tel" @blur="businessdata.tel = $event" :text="businessdata.tel"></Editable>
   </div>
 </template>
 

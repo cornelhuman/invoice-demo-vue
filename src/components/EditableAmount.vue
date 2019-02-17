@@ -1,5 +1,5 @@
 <template>
-  <div contenteditable="true" ref="element" v-text="amount" style="overflow-wrap:normal"></div>
+  <span contenteditable="true" ref="element" v-text="amount" style="overflow-wrap:normal"></span>
 </template>
 
 <script lang="ts">
