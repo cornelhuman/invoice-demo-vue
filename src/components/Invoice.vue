@@ -1,6 +1,8 @@
 <template>
   <div>
-    <button class="btn btn-primary btn-side" type="button" @click="CreatePDF">PDF</button>
+    <button class="btn btn-primary btn-side" @click="CreatePDF">
+      <font-awesome-icon icon="file-download" size="2x"/>
+    </button>
     <div id="invoicedocument" ref="pdfdocument">
       <div v-if="layoutType === 'Standard'">
         <InvoiceStandard></InvoiceStandard>

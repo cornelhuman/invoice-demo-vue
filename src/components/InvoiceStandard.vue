@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <!--<button @click="LogDetails">Log Details</button>-->
     <div class="border container my-1 rounded invoice-border">
       <div class="p-4">
