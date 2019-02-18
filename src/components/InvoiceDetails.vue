@@ -22,6 +22,7 @@
           <div class="col-4 quantity">
             <EditableAmount
               data-text="Quantiry"
+              digits="0"
               :amount="item.quantity"
               @blur="item.quantity = $event"
             ></EditableAmount>

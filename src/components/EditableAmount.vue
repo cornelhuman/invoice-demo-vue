@@ -8,15 +8,17 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class EditableAmount extends Vue {
   @Prop(Number) public amount!: number;
+  @Prop(Number) public digits!: number;
 
   public $refs!: {
     element: HTMLFormElement;
   };
 
   public mounted() {
+    const numdigits = this.digits || 2;
     // Set div value from text property
     // Tofixed to trim initial values
-    this.$refs.element.innerHTML = this.amount.toFixed(2);
+    this.$refs.element.innerHTML = this.amount.toFixed(numdigits);
 
     // Check for Enter
     this.$refs.element.addEventListener("keydown", event => {
@@ -28,7 +30,7 @@ export default class EditableAmount extends Vue {
     // On blur emit the new value
     this.$refs.element.addEventListener("blur", () => {
       // We only want 2 decimal values for these amounts
-      const res = parseFloat(this.$refs.element.innerText).toFixed(2);
+      const res = parseFloat(this.$refs.element.innerText).toFixed(numdigits);
       // his.$refs.element.innerText = res;
       this.$emit("blur", parseFloat(res));
     });
