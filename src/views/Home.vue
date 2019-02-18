@@ -1,5 +1,5 @@
 <template>
-  <div class="home" ondrop="return false;">
+  <div class="home text-center" ondrop="return false;">
     <i>Click on text to start Editing</i>
     <Invoice></Invoice>
     <!--<input type="number" :value="amount">>
