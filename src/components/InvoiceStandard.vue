@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <!--<button @click="LogDetails">Log Details</button>-->
     <div class="border container my-1 rounded invoice-border">
       <div class="p-4">
@@ -42,23 +42,23 @@
           </div>
 
           <div class="col-6 text-right" style="pr-3">
-            <!--
             <div class="d-flex justify-content-end pr-4">
               <div style="margin-right:5px">Invoice Number:</div>
               <div>
-                <editable
+                <EditableAmount
+                  digits="0"
                   data-text="1000"
                   :text="invoice.invoicenumber"
                   @blur="invoice.invoicenumber = $event"
-                ></editable>
+                ></EditableAmount>
               </div>
             </div>
             <div class="d-flex justify-content-end pr-4">
               <div style="margin-right:5px">Invoice Date:</div>
               <div>
-                <editable :text="invoice.invoicedate" @blur="invoice.invoicedate = $event"></editable>
+                <Editable :text="invoice.invoicedate" @blur="invoice.invoicedate = $event"></Editable>
               </div>
-            </div>-->
+            </div>
           </div>
         </div>
 
