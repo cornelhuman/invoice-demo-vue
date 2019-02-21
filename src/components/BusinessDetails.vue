@@ -42,19 +42,21 @@ import Business from "@/classes/Business.ts";
   }
 })
 export default class BusinessDetails extends Vue {
-  @Prop(Business) public business!: Business;
-
   public $refs!: {
     // fileform: HTMLFormElement;
   };
 
   get businessdata(): Business {
-    return this.business;
+    return this.$store.state.business;
   }
 
   @Watch("businessdata", { deep: true })
   public watchBusiness(val: Business) {
-    this.$emit("change", val);
+    this.$store.commit("businessupdate", val);
+  }
+
+  public CallTest() {
+    console.log(this.$store.state.business);
   }
 }
 </script>

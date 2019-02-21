@@ -8,8 +8,8 @@
             <div class="row">
               <div class="col-md-12">
                 <DragDropLogo
-                  :src="business.logo"
-                  @change="business.logo = $event"
+                  :src="businessdata.logo"
+                  @change="businessdata.logo = $event"
                   :msg="uploadmsg"
                   @progress="uploadmsg = $event"
                 ></DragDropLogo>
@@ -19,7 +19,7 @@
 
           <div class="col-md-6 text-right" style="font-size:1em">
             <div class="mr-4">
-              <BusinessDetails :business="business" @change="business = $event"></BusinessDetails>
+              <BusinessDetails></BusinessDetails>
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@
               <div style="margin-right:5px">Invoice Number:</div>
               <div>
                 <EditableAmount
-                  digits="0"
+                  :digits="0"
                   data-text="1000"
                   :text="invoice.invoicenumber"
                   @blur="invoice.invoicenumber = $event"
@@ -69,6 +69,7 @@
         <hr>
         <p class="text-left">
           <Editable
+            :multiline="true"
             data-text="Banking Details"
             @blur="business.bankdetails = $event"
             :text="business.bankdetails"
@@ -107,11 +108,20 @@ import InvoiceItem from "@/classes/InvoiceItem.ts";
 export default class InvoiceStandard extends Vue {
   @Prop(String) public msg!: string;
 
+  get businessdata(): Business {
+    return this.$store.state.business;
+  }
+
+  @Watch("businessdata", { deep: true })
+  public watchBusiness(val: Business) {
+    //   console.log("Settting business data");
+    this.$store.commit("businessupdate", val);
+    //this.$emit("change", val);
+  }
+
   public layoutType: string = "Standard";
   public uploadmsg: string = "Drag and Drop Logo Here";
-
   public business: Business = new Business();
-
   public contact: Contact = new Contact();
   public invoice: Invoice = new Invoice(1000, "New Invoice");
 
@@ -125,8 +135,14 @@ export default class InvoiceStandard extends Vue {
 
   public created() {
     this.business.invoicenumber = 1000;
-    this.invoice.addItem(1, "Hardware", "Dell XPS 17 Laptop", 1, 2300);
-    this.invoice.addItem(2, "Software", "Windows 10 Profesional", 2, 450.45);
+    this.invoice.addItem(
+      1,
+      "Step Ladder",
+      "9 Meter Aluminius Step Ladder",
+      1,
+      1500
+    );
+    // this.invoice.addItem(2, "Software", "Windows 10 Profesional", 2, 450.45);
   }
 
   public mounted() {

@@ -22,7 +22,7 @@
           <div class="col-4 quantity">
             <EditableAmount
               data-text="Quantiry"
-              digits="0"
+              :digits="0"
               :amount="item.quantity"
               @blur="item.quantity = $event"
             ></EditableAmount>
@@ -62,7 +62,7 @@
       <div class="col-4"></div>
       <div class="col-1"></div>
       <div class="col-4">
-        <div class="row">
+        <div class="row" v-if="invoicedata.tax > 0">
           <div class="col-8 text-right font-weight-bold">Sub Total</div>
           <div class="col-4 font-weight-bold text-right price">{{invoicedata.subtotal.toFixed(2)}}</div>
         </div>
@@ -73,7 +73,7 @@
       <div class="col-4"></div>
       <div class="col-1"></div>
       <div class="col-4">
-        <div class="row">
+        <div class="row" v-if="invoicedata.tax > 0">
           <div class="col-8 text-right font-weight-bold">Tax</div>
           <div class="col-4 font-weight-bold text-right price">{{invoicedata.tax.toFixed(2)}}</div>
         </div>
@@ -168,6 +168,6 @@ export default class InvoiceDetails extends Vue {
 }
 
 .price::before {
-  content: "$ ";
+  content: "R ";
 }
 </style>

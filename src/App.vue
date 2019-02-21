@@ -13,13 +13,25 @@ import Component from "vue-class-component";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import InvoiceNav from "@/components/InvoiceNav.vue"; // @ is an alias to /src"
+import Business from "@/classes/Business.ts";
 
 @Component({
   components: {
     InvoiceNav
   }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  public created() {
+    let businessdata = new Business();
+    if (localStorage.business) {
+      businessdata = JSON.parse(localStorage.business);
+    }
+
+    this.$store.commit("businessupdate", businessdata);
+  }
+
+  public mounted() {}
+}
 </script>
 
 <style>

@@ -18,7 +18,7 @@ export default class Invoice {
         this.subtotal = 0;
         this.tax = 0;
         this.total = 0;
-        this.taxpercentage = 15;
+        this.taxpercentage = 0;
     }
 
     public addItem(id: number, category: string, description: string, quantity: number, price: number) {

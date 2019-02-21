@@ -8,18 +8,21 @@
         <InvoiceStandard></InvoiceStandard>
       </div>
     </div>
+    <Settings></Settings>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import InvoiceStandard from "@/components/InvoiceStandard.vue"; // @ is an alias to /src
+import Settings from "@/components/Settings.vue"; // @ is an alias to /src
 import axios from "axios";
 import filedownload from "js-file-download";
 
 @Component({
   components: {
-    InvoiceStandard
+    InvoiceStandard,
+    Settings
   }
 })
 export default class Invoice extends Vue {

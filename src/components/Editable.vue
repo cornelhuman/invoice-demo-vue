@@ -8,6 +8,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 @Component
 export default class Editable extends Vue {
   @Prop(String) public text!: string;
+  @Prop(Boolean) public multiline!: false;
 
   public $refs!: {
     element: HTMLFormElement;
@@ -20,8 +21,10 @@ export default class Editable extends Vue {
 
     // Check for Enter
     this.$refs.element.addEventListener("keydown", event => {
-      if (event.keyCode === 13) {
-        this.$refs.element.blur();
+      if (!this.multiline) {
+        if (event.keyCode === 13) {
+          this.$refs.element.blur();
+        }
       }
     });
 

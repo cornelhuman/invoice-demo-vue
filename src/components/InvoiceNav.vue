@@ -29,14 +29,14 @@
           style="font-size:1.5em;font-weight:bold"
           href="http://www.cornelhuman.com"
         >CORNEL HUMAN</a>
-        <!--<button
+        <button
           class="btn my-2 my-sm-0 text-white"
           style="font-size:20pt"
           type="button"
           v-b-modal.modal1
         >
-          <i class="fa fa-cog"></i>
-        </button>-->
+          <font-awesome-icon icon="cog"/>
+        </button>
       </div>
     </div>
   </nav>
