@@ -3,7 +3,7 @@
     <!-- Modal Component -->
     <b-modal id="modal1" title="Settings">
       <!--<p class="my-4">Hello from modal!</p> -->
-      <input type="checkbox" id="checkbox" v-model="business.showText">
+      <input type="checkbox" id="checkbox" v-model="businessdata.showNameAsText">
       <label for="checkbox" class="pl-2">Use Text for Company Logo</label>
     </b-modal>
   </div>
@@ -25,14 +25,18 @@ export default class Settings extends Vue {
 
   public layoutType: string = "Standard";
   public uploadmsg: string = "Drag and Drop Logo Here";
-
-  public business: Business = new Business();
-  public contact: Contact = new Contact();
-  public invoice: Invoice = new Invoice(1000, "New Invoice");
-
   public $refs!: {
     // fileform: HTMLFormElement;
   };
+
+  get businessdata(): Business {
+    return this.$store.state.business;
+  }
+
+  @Watch("businessdata", { deep: true })
+  public watchBusiness(val: Business) {
+    this.$store.commit("businessupdate", val);
+  }
 }
 </script>
 

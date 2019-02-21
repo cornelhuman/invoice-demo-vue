@@ -1,6 +1,7 @@
 export default class Business {
     public logo: string;
     public name: string;
+    public showNameAsText: boolean;
     public address1: string;
     public address2: string;
     public city: string;
@@ -12,6 +13,7 @@ export default class Business {
     public taxname: string;
     public taxpercentage: number;
     public bankdetails: string;
+
 
     constructor() {
         this.logo = "";
@@ -27,5 +29,6 @@ export default class Business {
         this.taxname = "VAT";
         this.taxpercentage = 15;
         this.bankdetails = "";
+        this.showNameAsText = false;
     }
 }

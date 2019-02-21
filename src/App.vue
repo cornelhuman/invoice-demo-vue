@@ -29,8 +29,6 @@ export default class App extends Vue {
 
     this.$store.commit("businessupdate", businessdata);
   }
-
-  public mounted() {}
 }
 </script>
 

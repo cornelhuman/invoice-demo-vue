@@ -6,13 +6,24 @@
         <div class="row" style="background-color:white">
           <div class="col-md-6">
             <div class="row">
-              <div class="col-md-12">
-                <DragDropLogo
-                  :src="businessdata.logo"
-                  @change="businessdata.logo = $event"
-                  :msg="uploadmsg"
-                  @progress="uploadmsg = $event"
-                ></DragDropLogo>
+              <div class="col-md-12 text-left">
+                <div v-if="businessdata.showNameAsText">
+                  <h1 class="pt-2">
+                    <Editable
+                      data-text="Business Name"
+                      @blur="businessdata.name = $event"
+                      :text="businessdata.name"
+                    ></Editable>
+                  </h1>
+                </div>
+                <div v-else-if="!businessdata.showNameAsText">
+                  <DragDropLogo
+                    :src="businessdata.logo"
+                    @change="businessdata.logo = $event"
+                    :msg="uploadmsg"
+                    @progress="uploadmsg = $event"
+                  ></DragDropLogo>
+                </div>
               </div>
             </div>
           </div>
@@ -107,6 +118,14 @@ import InvoiceItem from "@/classes/InvoiceItem.ts";
 })
 export default class InvoiceStandard extends Vue {
   @Prop(String) public msg!: string;
+  public layoutType: string = "Standard";
+  public uploadmsg: string = "Drag and Drop Logo Here";
+  public business: Business = new Business();
+  public contact: Contact = new Contact();
+  public invoice: Invoice = new Invoice(1000, "New Invoice");
+  public $refs!: {
+    // fileform: HTMLFormElement;
+  };
 
   get businessdata(): Business {
     return this.$store.state.business;
@@ -116,18 +135,8 @@ export default class InvoiceStandard extends Vue {
   public watchBusiness(val: Business) {
     //   console.log("Settting business data");
     this.$store.commit("businessupdate", val);
-    //this.$emit("change", val);
+    // this.$emit("change", val);
   }
-
-  public layoutType: string = "Standard";
-  public uploadmsg: string = "Drag and Drop Logo Here";
-  public business: Business = new Business();
-  public contact: Contact = new Contact();
-  public invoice: Invoice = new Invoice(1000, "New Invoice");
-
-  public $refs!: {
-    // fileform: HTMLFormElement;
-  };
 
   public LogDetails() {
     console.log(this.business);

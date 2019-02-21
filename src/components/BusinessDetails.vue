@@ -1,11 +1,6 @@
 <template>
   <div>
     <Editable
-      data-text="Business Name"
-      @blur="businessdata.name = $event"
-      :text="businessdata.name"
-    ></Editable>
-    <Editable
       data-text="Business Address 1"
       @blur="businessdata.address1 = $event"
       :text="businessdata.address1"

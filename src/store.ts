@@ -14,8 +14,8 @@ export default new Vuex.Store({
   },
   mutations: {
     businessupdate(state, payload) {
-      state.business = payload
-      localStorage["business"] = JSON.stringify(state.business);
+      state.business = payload;
+      localStorage.business = JSON.stringify(state.business);
     }
 
   },
