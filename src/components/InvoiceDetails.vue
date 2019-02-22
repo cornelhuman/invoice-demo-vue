@@ -108,7 +108,7 @@ import InvoiceItem from "@/classes/InvoiceItem.ts";
   }
 })
 export default class InvoiceDetails extends Vue {
-  @Prop(Invoice) public invoice!: Invoice;
+  //@Prop(Invoice) public invoice!: Invoice;
 
   public showEditElements: boolean = true;
   public $refs!: {
@@ -116,14 +116,24 @@ export default class InvoiceDetails extends Vue {
   };
 
   get invoicedata(): Invoice {
-    return this.Calculate(this.invoice);
+    return this.Calculate(this.$store.state.invoice);
+    //return this.$store.state.invoice;
   }
 
   @Watch("invoicedata", { deep: true })
-  public watchContact(val: Invoice) {
-    // console.log("Invoice Data Changed");
-    this.$emit("change", val);
+  public watchInvoice(val: Invoice) {
+    this.$store.commit("invoiceupdate", val);
   }
+
+  // get invoicedata(): Invoice {
+  // return this.Calculate(this.invoice);
+  // }
+
+  // @Watch("invoicedata", { deep: true })
+  // public watchContact(val: Invoice) {
+  // console.log("Invoice Data Changed");
+  // this.$emit("change", val);
+  // }
 
   public addInvoiceRow() {
     console.log("Add a row to the invoice");

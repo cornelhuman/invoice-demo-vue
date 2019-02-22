@@ -18,7 +18,11 @@ export default class EditableAmount extends Vue {
     const numdigits = this.digits || 2;
     // Set div value from text property
     // Tofixed to trim initial values
-    this.$refs.element.innerHTML = this.amount.toFixed(numdigits);
+    if (this.amount) {
+      this.$refs.element.innerHTML = this.amount.toFixed(numdigits);
+    } else {
+      this.$refs.element.innerHTML = "";
+    }
 
     // Check for Enter
     this.$refs.element.addEventListener("keydown", event => {

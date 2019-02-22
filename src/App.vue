@@ -14,6 +14,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import InvoiceNav from "@/components/InvoiceNav.vue"; // @ is an alias to /src"
 import Business from "@/classes/Business.ts";
+import Invoice from "@/classes/Invoice.ts";
+import Contact from "@/classes/Contact.ts";
 
 @Component({
   components: {
@@ -21,13 +23,28 @@ import Business from "@/classes/Business.ts";
   }
 })
 export default class App extends Vue {
-  public created() {
+  public beforeCreate() {
     let businessdata = new Business();
+    let contactdata = new Contact();
+    let invoicedata = new Invoice(100, "NEW INVOICE");
+
     if (localStorage.business) {
       businessdata = JSON.parse(localStorage.business);
     }
 
+    if (localStorage.contact) {
+      let res: Contact = JSON.parse(localStorage.contact);
+      contactdata = res;
+    }
+
+    if (localStorage.invoice) {
+      let res: Invoice = JSON.parse(localStorage.invoice);
+      invoicedata = res;
+    }
+
     this.$store.commit("businessupdate", businessdata);
+    this.$store.commit("contactupdate", contactdata);
+    this.$store.commit("invoiceupdate", invoicedata);
   }
 }
 </script>

@@ -4,8 +4,8 @@
       <div>
         <editable
           data-text="FirstName"
-          :text="contact.firstname"
-          @blur="contact.firstname = $event"
+          :text="contactdata.firstname"
+          @blur="contactdata.firstname = $event"
         ></editable>
       </div>
       <div style="margin-left:5px">
@@ -61,19 +61,13 @@ import Contact from "@/classes/Contact.ts";
   }
 })
 export default class ContactDetails extends Vue {
-  @Prop(Contact) public contact!: Contact;
-
-  public $refs!: {
-    // fileform: HTMLFormElement;
-  };
-
   get contactdata(): Contact {
-    return this.contact;
+    return this.$store.state.contact;
   }
 
   @Watch("contactdata", { deep: true })
   public watchContact(val: Contact) {
-    this.$emit("change", val);
+    this.$store.commit("contactupdate", val);
   }
 }
 </script>

@@ -40,8 +40,8 @@
             <h2>
               <Editable
                 data-text="Invoice Title"
-                @blur="invoice.invoicetitle = $event"
-                :text="invoice.invoicetitle"
+                @blur="invoicedata.invoicetitle = $event"
+                :text="invoicedata.invoicetitle"
               ></Editable>
             </h2>
           </div>
@@ -49,7 +49,7 @@
 
         <div class="row" style="pl-2">
           <div class="col-6 p-3 text-left">
-            <ContactDetails :contact="contact" @change="contact = $event"></ContactDetails>
+            <ContactDetails></ContactDetails>
           </div>
 
           <div class="col-6 text-right" style="pr-3">
@@ -59,15 +59,15 @@
                 <EditableAmount
                   :digits="0"
                   data-text="1000"
-                  :text="invoice.invoicenumber"
-                  @blur="invoice.invoicenumber = $event"
+                  :text="invoicedata.invoicenumber"
+                  @blur="invoicedata.invoicenumber = $event"
                 ></EditableAmount>
               </div>
             </div>
             <div class="d-flex justify-content-end pr-4">
               <div style="margin-right:5px">Invoice Date:</div>
               <div>
-                <Editable :text="invoice.invoicedate" @blur="invoice.invoicedate = $event"></Editable>
+                <Editable :text="invoicedata.invoicedate" @blur="invoicedata.invoicedate = $event"></Editable>
               </div>
             </div>
           </div>
@@ -75,15 +75,14 @@
 
         <hr>
 
-        <InvoiceDetails :invoice="invoice" @change="invoice = $event"></InvoiceDetails>
-
+        <InvoiceDetails :invoice="invoicedata" @change="invoicedata = $event"></InvoiceDetails>
         <hr>
         <p class="text-left">
           <Editable
             :multiline="true"
             data-text="Banking Details"
-            @blur="business.bankdetails = $event"
-            :text="business.bankdetails"
+            @blur="businessdata.bankdetails = $event"
+            :text="businessdata.bankdetails"
           ></Editable>
         </p>
       </div>
@@ -120,15 +119,18 @@ export default class InvoiceStandard extends Vue {
   @Prop(String) public msg!: string;
   public layoutType: string = "Standard";
   public uploadmsg: string = "Drag and Drop Logo Here";
-  public business: Business = new Business();
-  public contact: Contact = new Contact();
-  public invoice: Invoice = new Invoice(1000, "New Invoice");
-  public $refs!: {
-    // fileform: HTMLFormElement;
-  };
+
+  // public invoice: Invoice = new Invoice(1000, "New Invoice");
+  // public $refs!: {
+  // fileform: HTMLFormElement;
+  // };
 
   get businessdata(): Business {
     return this.$store.state.business;
+  }
+
+  get invoicedata(): Invoice {
+    return this.$store.state.invoice;
   }
 
   @Watch("businessdata", { deep: true })
@@ -138,25 +140,9 @@ export default class InvoiceStandard extends Vue {
     // this.$emit("change", val);
   }
 
-  public LogDetails() {
-    console.log(this.business);
-  }
-
-  public created() {
-    this.business.invoicenumber = 1000;
-    this.invoice.addItem(
-      1,
-      "Step Ladder",
-      "9 Meter Aluminius Step Ladder",
-      1,
-      1500
-    );
-    // this.invoice.addItem(2, "Software", "Windows 10 Profesional", 2, 450.45);
-  }
-
-  public mounted() {
-    const refObj = this;
-    // console.log(this.logo);
+  @Watch("invoicedata", { deep: true })
+  public watchInvoice(val: Invoice) {
+    this.$store.commit("invoiceupdate", val);
   }
 }
 </script>

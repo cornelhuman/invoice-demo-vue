@@ -10,12 +10,22 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 
   state: {
-    business: Business
+    business: Business,
+    contact: Contact,
+    invoice: Invoice
   },
   mutations: {
     businessupdate(state, payload) {
       state.business = payload;
       localStorage.business = JSON.stringify(state.business);
+    },
+    contactupdate(state, payload) {
+      state.contact = payload;
+      localStorage.contact = JSON.stringify(state.contact);
+    },
+    invoiceupdate(state, payload) {
+      state.invoice = payload;
+      localStorage.invoice = JSON.stringify(state.invoice);
     }
 
   },
