@@ -37,6 +37,9 @@
         >
           <font-awesome-icon icon="cog"/>
         </button>
+        <b-button v-b-toggle.collapse1 variant="primary" style="font-size:20pt">
+          <font-awesome-icon icon="question"/>
+        </b-button>
       </div>
     </div>
   </nav>

@@ -1,8 +1,8 @@
 <template>
   <div>
     <InvoiceNav></InvoiceNav>
-    <div class="pt-5"></div>
-    <div class="pt-4"></div>
+    <div class="pt-4 mt-3"></div>
+    <div class="pt-2 mt-2"></div>
     <router-view></router-view>
   </div>
 </template>
