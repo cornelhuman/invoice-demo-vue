@@ -37,10 +37,6 @@ import Business from "@/classes/Business.ts";
   }
 })
 export default class BusinessDetails extends Vue {
-  public $refs!: {
-    // fileform: HTMLFormElement;
-  };
-
   get businessdata(): Business {
     return this.$store.state.business;
   }
@@ -49,20 +45,11 @@ export default class BusinessDetails extends Vue {
   public watchBusiness(val: Business) {
     this.$store.commit("businessupdate", val);
   }
-
-  public CallTest() {
-    console.log(this.$store.state.business);
-  }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.invoice-border {
-  border-color: black important!;
-  border-width: 2px important!;
-}
 
+<style scoped>
 [contentEditable="true"]:empty:not(:focus):before {
   content: attr(data-text);
 }

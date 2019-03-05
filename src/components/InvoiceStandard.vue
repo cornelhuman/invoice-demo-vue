@@ -20,8 +20,9 @@
                   <DragDropLogo
                     :src="businessdata.logo"
                     @change="businessdata.logo = $event"
-                    :msg="uploadmsg"
-                    @progress="uploadmsg = $event"
+                    :msg="logoUploadMsg"
+                    @progress="logoUploadMsg = $event"
+                    @onFilesReceived="UploadFileToFireBase"
                   ></DragDropLogo>
                 </div>
               </div>
@@ -116,14 +117,7 @@ import InvoiceItem from "@/classes/InvoiceItem.ts";
   }
 })
 export default class InvoiceStandard extends Vue {
-  @Prop(String) public msg!: string;
-  public layoutType: string = "Standard";
-  public uploadmsg: string = "Drag and Drop Logo Here";
-
-  // public invoice: Invoice = new Invoice(1000, "New Invoice");
-  // public $refs!: {
-  // fileform: HTMLFormElement;
-  // };
+  public logoUploadMsg: string = "Drag and Drop Logo Here";
 
   get businessdata(): Business {
     return this.$store.state.business;
@@ -135,9 +129,7 @@ export default class InvoiceStandard extends Vue {
 
   @Watch("businessdata", { deep: true })
   public watchBusiness(val: Business) {
-    //   console.log("Settting business data");
     this.$store.commit("businessupdate", val);
-    // this.$emit("change", val);
   }
 
   @Watch("invoicedata", { deep: true })
@@ -147,7 +139,6 @@ export default class InvoiceStandard extends Vue {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .invoice-border {
   border-color: black important!;

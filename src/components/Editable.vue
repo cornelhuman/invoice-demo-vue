@@ -14,12 +14,17 @@ export default class Editable extends Vue {
     element: HTMLFormElement;
   };
 
-  public mounted() {
-    // Set div value from text property
-
+  private setValue() {
     this.$refs.element.innerHTML = this.text;
+  }
 
-    // Check for Enter
+  private getValue(): string {
+    return this.$refs.element.innerText;
+  }
+
+  public mounted() {
+    this.setValue();
+
     this.$refs.element.addEventListener("keydown", event => {
       if (!this.multiline) {
         if (event.keyCode === 13) {
@@ -28,19 +33,13 @@ export default class Editable extends Vue {
       }
     });
 
-    // On blur emit the new value
     this.$refs.element.addEventListener("blur", () => {
-      this.$emit("blur", this.$refs.element.innerText);
+      this.$emit("blur", this.getValue());
     });
 
-    // Emit focus event, we may want to know when the element receives focus
     this.$refs.element.addEventListener("focus", () => {
       this.$emit("focus");
     });
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>

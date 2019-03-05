@@ -10,6 +10,7 @@ export default class Business {
     public email: string;
     public tel: string;
     public invoicenumber: number;
+    public addtax: boolean;
     public taxname: string;
     public taxpercentage: number;
     public bankdetails: string;
@@ -26,6 +27,7 @@ export default class Business {
         this.email = "";
         this.tel = "";
         this.invoicenumber = 1000;
+        this.addtax = true;
         this.taxname = "VAT";
         this.taxpercentage = 15;
         this.bankdetails = "";

@@ -38,8 +38,8 @@
       </div>
       <div class="col-2 text-right price">{{item.total.toFixed(2)}}</div>
       <div class="col-1 text-right" v-if="showEditElements">
-        <span @click="removeRow(index)">
-          <i class="fas fa-times pt-1" style="font-size: 18px;color:gray"></i>
+        <span @click="removeRow(item.id)">
+          <font-awesome-icon style="color:gray" icon="times"/>
         </span>
       </div>
     </div>
@@ -47,13 +47,13 @@
                 Add New Line Button
     -->
     <div class="row font-weight-bold border-bottom pb-2 mb-2" v-if="showEditElements">
-      <div class="col-6">
+      <div class="col-6 text-left">
         <span
           @click="addInvoiceRow"
           class="text-primary"
           style="font-size:18pt;outline: none;margin-top:2px;"
         >
-          <i class="fas fa-plus-circle"></i>
+          <font-awesome-icon icon="plus-circle"/>
         </span>
       </div>
     </div>
@@ -98,8 +98,8 @@ import { Vue, Prop, Watch } from "vue-property-decorator";
 import Component from "vue-class-component";
 import Editable from "@/components/Editable.vue"; // @ is an alias to /src
 import EditableAmount from "@/components/EditableAmount.vue"; // @ is an alias to /src
-import Invoice from "@/classes/Invoice.ts";
-import InvoiceItem from "@/classes/InvoiceItem.ts";
+import Invoice from "../classes/Invoice";
+import InvoiceItem from "../classes/InvoiceItem";
 
 @Component({
   components: {
@@ -108,7 +108,7 @@ import InvoiceItem from "@/classes/InvoiceItem.ts";
   }
 })
 export default class InvoiceDetails extends Vue {
-  //@Prop(Invoice) public invoice!: Invoice;
+  // @Prop(Invoice) public invoice!: Invoice;
 
   public showEditElements: boolean = true;
   public $refs!: {
@@ -117,7 +117,7 @@ export default class InvoiceDetails extends Vue {
 
   get invoicedata(): Invoice {
     return this.Calculate(this.$store.state.invoice);
-    //return this.$store.state.invoice;
+    // return this.$store.state.invoice;
   }
 
   @Watch("invoicedata", { deep: true })
@@ -136,11 +136,30 @@ export default class InvoiceDetails extends Vue {
   // }
 
   public addInvoiceRow() {
+    const invoice = this.$store.state.invoice;
+    let id = 1;
+    if (invoice.items.length > 0) {
+      const maxid = invoice.items.reduce(
+        (prev: InvoiceItem, current: InvoiceItem) =>
+          prev.id > current.id ? prev.id : current.id
+      );
+      id = maxid + 1;
+    }
+
+    const row = new InvoiceItem(id, "", "", 1, 0);
+    invoice.items.push(row);
+    this.$store.commit("invoiceupdate", invoice);
     console.log("Add a row to the invoice");
   }
 
-  public removeRow() {
-    console.log("Remove Row");
+  public removeRow(itemid: number) {
+    const invoice = this.$store.state.invoice;
+    const pos = invoice.items.findIndex(
+      (item: InvoiceItem) => item.id === itemid
+    );
+    invoice.items.splice(pos, 1);
+    this.$store.commit("invoiceupdate", invoice);
+    console.log("Add a row to the invoice");
   }
 
   private Calculate(val: Invoice) {
@@ -174,7 +193,8 @@ export default class InvoiceDetails extends Vue {
 }
 
 .quantity::after {
-  content: " x";
+  content: " x ";
+  text-align: right;
 }
 
 .price::before {

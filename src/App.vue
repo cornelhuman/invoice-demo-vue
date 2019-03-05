@@ -33,12 +33,12 @@ export default class App extends Vue {
     }
 
     if (localStorage.contact) {
-      let res: Contact = JSON.parse(localStorage.contact);
+      const res: Contact = JSON.parse(localStorage.contact);
       contactdata = res;
     }
 
     if (localStorage.invoice) {
-      let res: Invoice = JSON.parse(localStorage.invoice);
+      const res: Invoice = JSON.parse(localStorage.invoice);
       invoicedata = res;
     }
 

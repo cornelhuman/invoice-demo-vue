@@ -3,7 +3,7 @@
     <button class="btn btn-primary btn-side" @click="CreatePDF">
       <font-awesome-icon icon="file-download" size="2x"/>
     </button>
-    <div id="invoicedocument" ref="pdfdocument">
+    <div id="invoicedocument" ref="invoice">
       <div v-if="layoutType === 'Standard'">
         <InvoiceStandard></InvoiceStandard>
       </div>
@@ -17,7 +17,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 import InvoiceStandard from "@/components/InvoiceStandard.vue"; // @ is an alias to /src
 import Settings from "@/components/Settings.vue"; // @ is an alias to /src
 import axios from "axios";
-import filedownload from "js-file-download";
+import FileDownload from "js-file-download";
 
 @Component({
   components: {
@@ -31,14 +31,11 @@ export default class Invoice extends Vue {
   public layoutType: string = "Standard";
 
   public $refs!: {
-    pdfdocument: HTMLFormElement;
+    invoice: HTMLFormElement;
   };
 
-  public getDocumentHTML() {
-    // get the document html
-    const pdfhtml = this.$refs.pdfdocument.outerHTML;
-    // wrap the document html in a html document
-    // this gives us access to our bootstrap css that we uploaded to firebase and other resources we may need
+  public getInvoiceHTML() {
+    const pdfhtml = this.$refs.invoice.outerHTML;
     let html = "<!doctype html>";
     html = '<html lang="en">';
     html += "<head>";
@@ -59,7 +56,8 @@ export default class Invoice extends Vue {
     html += '<body class="container">';
     // There are some funny issues with for some reason there is an image bug where the first image opacity is 50%
     // By adding a &nbsp; it goes away
-    html += "<div>&nbsp;</div>" + pdfhtml;
+    html += "<div>&nbsp;</div>";
+    html += pdfhtml;
     html += "</body>";
     html += "</html>";
     return html;
@@ -67,22 +65,14 @@ export default class Invoice extends Vue {
 
   public CreatePDF() {
     const refObj = this;
-    const html = JSON.stringify(this.getDocumentHTML());
+    const html = JSON.stringify(this.getInvoiceHTML());
     const url =
       "https://us-central1-skillsdemo-2e3d6.cloudfunctions.net/html2pdf";
     axios
       .post(url, { html }, { responseType: "arraybuffer" })
       .then(response => {
-        /* eslint-disable no-console */
-        console.log(response);
-        filedownload(response.data, "invoice.pdf");
-        // refObj.showEditElements = true;
-        // refObj.downloadPDF = false;
+        FileDownload(response.data, "invoice.pdf");
       });
-  }
-
-  public mounted() {
-    const refObj = this;
   }
 }
 </script>

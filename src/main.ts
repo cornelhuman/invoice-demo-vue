@@ -6,10 +6,10 @@ import firebase from "firebase";
 import BootstrapVue from 'bootstrap-vue';
 import FireBaseConfig from './FireBaseConfig';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCoffee, faFileDownload, faCog, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { faCoffee, faFileDownload, faCog, faQuestion, faPlusCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add(faFileDownload, faCog, faQuestion);
+library.add(faFileDownload, faCog, faQuestion, faPlusCircle, faTimes);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.use(BootstrapVue);
 
