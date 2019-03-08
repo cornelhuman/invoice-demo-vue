@@ -62,7 +62,7 @@
       <div class="col-4"></div>
       <div class="col-1"></div>
       <div class="col-4">
-        <div class="row" v-if="invoicedata.tax > 0">
+        <div class="row" v-if="businessdata.addtax">
           <div class="col-8 text-right font-weight-bold">Sub Total</div>
           <div class="col-4 font-weight-bold text-right price">{{invoicedata.subtotal.toFixed(2)}}</div>
         </div>
@@ -73,8 +73,8 @@
       <div class="col-4"></div>
       <div class="col-1"></div>
       <div class="col-4">
-        <div class="row" v-if="invoicedata.tax > 0">
-          <div class="col-8 text-right font-weight-bold">Tax</div>
+        <div class="row" v-if="businessdata.addtax">
+          <div class="col-8 text-right font-weight-bold">{{businessdata.taxname}}</div>
           <div class="col-4 font-weight-bold text-right price">{{invoicedata.tax.toFixed(2)}}</div>
         </div>
       </div>
@@ -114,6 +114,10 @@ export default class InvoiceDetails extends Vue {
   public $refs!: {
     // fileform: HTMLFormElement;
   };
+
+  get businessdata(): Invoice {
+    return this.$store.state.business;
+  }
 
   get invoicedata(): Invoice {
     this.$store.commit("Calculate");

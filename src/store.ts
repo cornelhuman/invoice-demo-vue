@@ -72,8 +72,8 @@ export default new Vuex.Store({
         item.total = item.quantity * item.price;
         state.invoice.subtotal += item.total;
       });
-      if (state.invoice.taxpercentage > 0) {
-        state.invoice.tax = (state.invoice.subtotal * state.invoice.taxpercentage) / 100;
+      if (state.business.taxpercentage > 0) {
+        state.invoice.tax = (state.invoice.subtotal * state.business.taxpercentage) / 100;
         state.invoice.total = state.invoice.subtotal + state.invoice.tax;
       } else {
         state.invoice.tax = 0;
