@@ -24,27 +24,9 @@ import Contact from "@/classes/Contact.ts";
 })
 export default class App extends Vue {
   public beforeCreate() {
-    let businessdata = new Business();
-    let contactdata = new Contact();
-    let invoicedata = new Invoice(100, "NEW INVOICE");
-
-    if (localStorage.business) {
-      businessdata = JSON.parse(localStorage.business);
-    }
-
-    if (localStorage.contact) {
-      const res: Contact = JSON.parse(localStorage.contact);
-      contactdata = res;
-    }
-
-    if (localStorage.invoice) {
-      const res: Invoice = JSON.parse(localStorage.invoice);
-      invoicedata = res;
-    }
-
-    this.$store.commit("businessupdate", businessdata);
-    this.$store.commit("contactupdate", contactdata);
-    this.$store.commit("invoiceupdate", invoicedata);
+    this.$store.commit("loadBusinessData");
+    this.$store.commit("loadContactData");
+    this.$store.commit("loadInvoiceData");
   }
 }
 </script>

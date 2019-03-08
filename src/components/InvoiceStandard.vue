@@ -22,7 +22,6 @@
                     @change="businessdata.logo = $event"
                     :msg="logoUploadMsg"
                     @progress="logoUploadMsg = $event"
-                    @onFilesReceived="UploadFileToFireBase"
                   ></DragDropLogo>
                 </div>
               </div>
@@ -76,7 +75,11 @@
 
         <hr>
 
-        <InvoiceDetails :invoice="invoicedata" @change="invoicedata = $event"></InvoiceDetails>
+        <InvoiceDetails
+          :invoice="invoicedata"
+          @change="invoicedata = $event"
+          :showicons="showicons"
+        ></InvoiceDetails>
         <hr>
         <p class="text-left">
           <Editable
@@ -117,6 +120,7 @@ import InvoiceItem from "@/classes/InvoiceItem.ts";
   }
 })
 export default class InvoiceStandard extends Vue {
+  @Prop(Boolean) public showicons!: boolean;
   public logoUploadMsg: string = "Drag and Drop Logo Here";
 
   get businessdata(): Business {

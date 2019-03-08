@@ -1,10 +1,32 @@
 <template>
   <div>
-    <!-- Modal Component -->
     <b-modal id="modal1" title="Settings">
-      <!--<p class="my-4">Hello from modal!</p> -->
-      <input type="checkbox" id="checkbox" v-model="businessdata.showNameAsText">
-      <label for="checkbox" class="pl-2">Use Text for Company Logo</label>
+      <div class="row ml-3">
+        <input type="checkbox" v-model="businessdata.showNameAsText">
+        <label for="checkbox" class="pl-2">Use Text for Company Logo</label>
+      </div>
+      <div class="row ml-3">
+        <input type="checkbox" v-model="businessdata.addtax">
+        <label for="checkbox" class="pl-2">Add Tax</label>
+      </div>
+      <template v-if="businessdata.addtax">
+        <div class="row ml-3">
+          <div class="col-6 text-right">
+            <label for="checkbox" class="pl-2">Tax Name</label>
+          </div>
+          <div class="col-6">
+            <input type="text" v-model="businessdata.taxname">
+          </div>
+        </div>
+        <div class="row ml-3">
+          <div class="col-6 text-right">
+            <label for="checkbox" class="pl-2">Tax Percentage (15)</label>
+          </div>
+          <div class="col-6">
+            <input type="number" v-model="businessdata.taxpercentage">
+          </div>
+        </div>
+      </template>
     </b-modal>
   </div>
 </template>
@@ -13,22 +35,11 @@
 import { Vue, Prop, Watch } from "vue-property-decorator";
 import Component from "vue-class-component";
 import Business from "@/classes/Business.ts";
-import Contact from "@/classes/Contact.ts";
-import Invoice from "@/classes/Invoice.ts";
-import InvoiceItem from "@/classes/InvoiceItem.ts";
 
 @Component({
   components: {}
 })
 export default class Settings extends Vue {
-  @Prop(String) public msg!: string;
-
-  public layoutType: string = "Standard";
-  public uploadmsg: string = "Drag and Drop Logo Here";
-  public $refs!: {
-    // fileform: HTMLFormElement;
-  };
-
   get businessdata(): Business {
     return this.$store.state.business;
   }
@@ -39,7 +50,3 @@ export default class Settings extends Vue {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>

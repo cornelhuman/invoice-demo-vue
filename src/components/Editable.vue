@@ -14,14 +14,6 @@ export default class Editable extends Vue {
     element: HTMLFormElement;
   };
 
-  private setValue() {
-    this.$refs.element.innerHTML = this.text;
-  }
-
-  private getValue(): string {
-    return this.$refs.element.innerText;
-  }
-
   public mounted() {
     this.setValue();
 
@@ -40,6 +32,14 @@ export default class Editable extends Vue {
     this.$refs.element.addEventListener("focus", () => {
       this.$emit("focus");
     });
+  }
+
+  private setValue() {
+    this.$refs.element.innerHTML = this.text;
+  }
+
+  private getValue(): string {
+    return this.$refs.element.innerText;
   }
 }
 </script>

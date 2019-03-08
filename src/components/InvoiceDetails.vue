@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="col-2 text-right price">{{item.total.toFixed(2)}}</div>
-      <div class="col-1 text-right" v-if="showEditElements">
+      <div class="col-1 text-right" v-if="showicons">
         <span @click="removeRow(item.id)">
           <font-awesome-icon style="color:gray" icon="times"/>
         </span>
@@ -46,7 +46,7 @@
     <!-- 
                 Add New Line Button
     -->
-    <div class="row font-weight-bold border-bottom pb-2 mb-2" v-if="showEditElements">
+    <div class="row font-weight-bold border-bottom pb-2 mb-2" v-if="showicons">
       <div class="col-6 text-left">
         <span
           @click="addInvoiceRow"
@@ -109,15 +109,15 @@ import InvoiceItem from "../classes/InvoiceItem";
 })
 export default class InvoiceDetails extends Vue {
   // @Prop(Invoice) public invoice!: Invoice;
+  @Prop(Boolean) public showicons!: boolean;
 
-  public showEditElements: boolean = true;
   public $refs!: {
     // fileform: HTMLFormElement;
   };
 
   get invoicedata(): Invoice {
-    return this.Calculate(this.$store.state.invoice);
-    // return this.$store.state.invoice;
+    this.$store.commit("Calculate");
+    return this.$store.state.invoice;
   }
 
   @Watch("invoicedata", { deep: true })
@@ -125,58 +125,12 @@ export default class InvoiceDetails extends Vue {
     this.$store.commit("invoiceupdate", val);
   }
 
-  // get invoicedata(): Invoice {
-  // return this.Calculate(this.invoice);
-  // }
-
-  // @Watch("invoicedata", { deep: true })
-  // public watchContact(val: Invoice) {
-  // console.log("Invoice Data Changed");
-  // this.$emit("change", val);
-  // }
-
   public addInvoiceRow() {
-    const invoice = this.$store.state.invoice;
-    let id = 1;
-    if (invoice.items.length > 0) {
-      const maxid = invoice.items.reduce(
-        (prev: InvoiceItem, current: InvoiceItem) =>
-          prev.id > current.id ? prev.id : current.id
-      );
-      id = maxid + 1;
-    }
-
-    const row = new InvoiceItem(id, "", "", 1, 0);
-    invoice.items.push(row);
-    this.$store.commit("invoiceupdate", invoice);
-    console.log("Add a row to the invoice");
+    this.$store.commit("addInvoiceRow");
   }
 
   public removeRow(itemid: number) {
-    const invoice = this.$store.state.invoice;
-    const pos = invoice.items.findIndex(
-      (item: InvoiceItem) => item.id === itemid
-    );
-    invoice.items.splice(pos, 1);
-    this.$store.commit("invoiceupdate", invoice);
-    console.log("Add a row to the invoice");
-  }
-
-  private Calculate(val: Invoice) {
-    // console.log("Calculating Totals");
-    val.subtotal = 0;
-    val.items.forEach(item => {
-      item.total = item.quantity * item.price;
-      val.subtotal += item.total;
-    });
-    if (val.taxpercentage > 0) {
-      val.tax = (val.subtotal * val.taxpercentage) / 100;
-      val.total = val.subtotal + val.tax;
-    } else {
-      val.tax = 0;
-      val.total = val.subtotal;
-    }
-    return val;
+    this.$store.commit("removeRow");
   }
 }
 </script>

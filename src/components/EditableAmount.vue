@@ -14,18 +14,6 @@ export default class EditableAmount extends Vue {
     element: HTMLFormElement;
   };
 
-  private getStringValue(numberOfDigits: Number): string {
-    return parseFloat(this.$refs.element.innerText).toFixed(this.digits);
-  }
-
-  private getNumberValue(numberOfDigits: Number): Number {
-    return parseFloat(this.getStringValue(numberOfDigits));
-  }
-
-  private setValue(numberOfDigits: Number) {
-    this.$refs.element.innerHTML = this.amount ? this.amount.toFixed() : "";
-  }
-
   public mounted() {
     const numberOfDigits = this.digits || 2;
 
@@ -44,6 +32,18 @@ export default class EditableAmount extends Vue {
     this.$refs.element.addEventListener("focus", () => {
       this.$emit("focus");
     });
+  }
+
+  private getStringValue(numberOfDigits: number): string {
+    return parseFloat(this.$refs.element.innerText).toFixed(this.digits);
+  }
+
+  private getNumberValue(numberOfDigits: number): number {
+    return parseFloat(this.getStringValue(numberOfDigits));
+  }
+
+  private setValue(numberOfDigits: number) {
+    this.$refs.element.innerHTML = this.amount ? this.amount.toFixed() : "";
   }
 }
 </script>

@@ -1,11 +1,12 @@
 <template>
   <div>
-    <button class="btn btn-primary btn-side" @click="CreatePDF">
+    <div v-if="!showicons" class="loader mx-auto"></div>
+    <button class="btn btn-primary btn-side" @click="StartDownloadPDF">
       <font-awesome-icon icon="file-download" size="2x"/>
     </button>
     <div id="invoicedocument" ref="invoice">
       <div v-if="layoutType === 'Standard'">
-        <InvoiceStandard></InvoiceStandard>
+        <InvoiceStandard :showicons="showicons"></InvoiceStandard>
       </div>
     </div>
     <Settings></Settings>
@@ -27,12 +28,16 @@ import FileDownload from "js-file-download";
 })
 export default class Invoice extends Vue {
   @Prop(String) public msg!: string;
-
+  public showicons: boolean = true;
   public layoutType: string = "Standard";
 
   public $refs!: {
     invoice: HTMLFormElement;
   };
+
+  public StartDownloadPDF() {
+    this.showicons = !this.showicons;
+  }
 
   public getInvoiceHTML() {
     const pdfhtml = this.$refs.invoice.outerHTML;
@@ -71,8 +76,17 @@ export default class Invoice extends Vue {
     axios
       .post(url, { html }, { responseType: "arraybuffer" })
       .then(response => {
+        this.showicons = true;
         FileDownload(response.data, "invoice.pdf");
       });
+  }
+
+  public updated() {
+    console.log("updated");
+    if (!this.showicons) {
+      console.log("Creating PDF");
+      this.CreatePDF();
+    }
   }
 }
 </script>
@@ -82,5 +96,28 @@ export default class Invoice extends Vue {
 .btn-side {
   position: fixed;
   right: 10px;
+}
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>
