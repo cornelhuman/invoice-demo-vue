@@ -22,6 +22,7 @@
                     @change="businessdata.logo = $event"
                     :msg="logoUploadMsg"
                     @progress="logoUploadMsg = $event"
+                    :showicons="showicons"
                   ></DragDropLogo>
                 </div>
               </div>
@@ -121,7 +122,7 @@ import InvoiceItem from "@/classes/InvoiceItem.ts";
 })
 export default class InvoiceStandard extends Vue {
   @Prop(Boolean) public showicons!: boolean;
-  public logoUploadMsg: string = "Drag and Drop Logo Here";
+  public logoUploadMsg: string = "Choose File or Drag it Here";
 
   get businessdata(): Business {
     return this.$store.state.business;

@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import Business from "@/classes/Business.ts";
 import Contact from "@/classes/Contact.ts";
 import Invoice from "@/classes/Invoice.ts";
+import Currency from "@/classes/Currency.ts";
 import InvoiceItem from "@/classes/InvoiceItem.ts";
 
 Vue.use(Vuex);
@@ -24,7 +25,11 @@ export default new Vuex.Store({
     loadInvoiceData(state, payload) {
       state.invoice = JSON.parse(localStorage.invoice);
     },
-
+    businessupdatecurrencysymbol(state, payload) {
+      state.business.countrycode = payload;
+      state.business.currencysymbol = Currency.list[payload].symbol;
+      localStorage.business = JSON.stringify(state.business);
+    },
     businessupdate(state, payload) {
       state.business = payload;
       localStorage.business = JSON.stringify(state.business);

@@ -14,4 +14,6 @@ export default class Business {
     public taxname: string = "";
     public taxpercentage: number = 0;
     public bankdetails: string = "";
+    public countrycode: string = "";
+    public currencysymbol: string = "$";
 }

@@ -6,7 +6,7 @@
       <div class="col-3">Quantity x Price</div>
       <div class="col-2 text-right">Total</div>
     </div>
-    <div class="row text-left" v-bind:key="item.id" v-for="(item,index) in invoicedata.items">
+    <div class="row text-left" v-bind:key="item.id" v-for="(item) in invoicedata.items">
       <div class="col-2">
         <Editable data-text="Category of Item" @blur="item.category = $event" :text="item.category"></Editable>
       </div>
@@ -27,16 +27,22 @@
               @blur="item.quantity = $event"
             ></EditableAmount>
           </div>
-          <div class="col-8 price">
-            <EditableAmount
-              data-text="Price"
-              :amount="parseFloat(item.price.toFixed(2))"
-              @blur="item.price = $event"
-            ></EditableAmount>
+          <div class="col-7 8">
+            <span>{{businessdata.currencysymbol}}&nbsp;</span>
+            <span>
+              <EditableAmount
+                data-text="Price"
+                :amount="parseFloat(item.price.toFixed(2))"
+                @blur="item.price = $event"
+              ></EditableAmount>
+            </span>
           </div>
         </div>
       </div>
-      <div class="col-2 text-right price">{{item.total.toFixed(2)}}</div>
+      <div class="col-2 text-right">
+        <span>{{businessdata.currencysymbol}}&nbsp;</span>
+        <span>{{item.total.toFixed(2)}}</span>
+      </div>
       <div class="col-1 text-right" v-if="showicons">
         <span @click="removeRow(item.id)">
           <font-awesome-icon style="color:gray" icon="times"/>
@@ -64,7 +70,10 @@
       <div class="col-4">
         <div class="row" v-if="businessdata.addtax">
           <div class="col-8 text-right font-weight-bold">Sub Total</div>
-          <div class="col-4 font-weight-bold text-right price">{{invoicedata.subtotal.toFixed(2)}}</div>
+          <div class="col-4 font-weight-bold text-right">
+            <span>{{businessdata.currencysymbol}}&nbsp;</span>
+            <span>{{invoicedata.subtotal.toFixed(2)}}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -75,7 +84,10 @@
       <div class="col-4">
         <div class="row" v-if="businessdata.addtax">
           <div class="col-8 text-right font-weight-bold">{{businessdata.taxname}}</div>
-          <div class="col-4 font-weight-bold text-right price">{{invoicedata.tax.toFixed(2)}}</div>
+          <div class="col-4 font-weight-bold text-right">
+            <span>{{businessdata.currencysymbol}}&nbsp;</span>
+            <span>{{invoicedata.tax.toFixed(2)}}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -86,7 +98,10 @@
       <div class="col-4">
         <div class="row">
           <div class="col-8 text-right font-weight-bold">Total</div>
-          <div class="col-4 font-weight-bold text-right price">{{invoicedata.total.toFixed(2)}}</div>
+          <div class="col-4 font-weight-bold text-right">
+            <span>{{businessdata.currencysymbol}}&nbsp;</span>
+            <span>{{invoicedata.total.toFixed(2)}}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -116,6 +131,7 @@ export default class InvoiceDetails extends Vue {
   };
 
   get businessdata(): Invoice {
+    // console.log("currencysymbol" + this.$store.state.business.currencysymbol);
     return this.$store.state.business;
   }
 
