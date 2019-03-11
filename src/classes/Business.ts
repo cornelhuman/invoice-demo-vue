@@ -16,4 +16,5 @@ export default class Business {
     public bankdetails: string = "";
     public countrycode: string = "";
     public currencysymbol: string = "$";
+    public showhelp: boolean = true;
 }

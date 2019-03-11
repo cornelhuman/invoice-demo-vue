@@ -17,13 +17,19 @@ export default new Vuex.Store({
   },
   mutations: {
     loadContactData(state, payload) {
-      state.contact = JSON.parse(localStorage.contact);
+      if (localStorage.contact) {
+        state.contact = JSON.parse(localStorage.contact);
+      }
     },
     loadBusinessData(state, payload) {
-      state.business = JSON.parse(localStorage.business);
+      if (localStorage.business) {
+        state.business = JSON.parse(localStorage.business);
+      }
     },
     loadInvoiceData(state, payload) {
-      state.invoice = JSON.parse(localStorage.invoice);
+      if (localStorage.invoice) {
+        state.invoice = JSON.parse(localStorage.invoice);
+      }
     },
     businessupdatecurrencysymbol(state, payload) {
       state.business.countrycode = payload;
@@ -41,6 +47,10 @@ export default new Vuex.Store({
     invoiceupdate(state, payload) {
       state.invoice = payload;
       localStorage.invoice = JSON.stringify(state.invoice);
+    },
+    invoiceToggleHelp(state) {
+      state.business.showhelp = !state.business.showhelp;
+      localStorage.business = JSON.stringify(state.business);
     },
     addInvoiceRow(state) {
       let maxId = 1;

@@ -37,7 +37,7 @@
         >
           <font-awesome-icon icon="cog"/>
         </button>
-        <b-button v-b-toggle.collapse1 variant="primary" style="font-size:20pt">
+        <b-button @click="invoiceToggleHelp" variant="primary" style="font-size:20pt">
           <font-awesome-icon icon="question"/>
         </b-button>
       </div>
@@ -50,5 +50,9 @@ import { Vue, Prop, Watch } from "vue-property-decorator";
 import Component from "vue-class-component";
 
 @Component
-export default class InvoiceNav extends Vue {}
+export default class InvoiceNav extends Vue {
+  public invoiceToggleHelp() {
+    this.$store.commit("invoiceToggleHelp");
+  }
+}
 </script>

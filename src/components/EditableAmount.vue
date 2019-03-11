@@ -35,7 +35,7 @@ export default class EditableAmount extends Vue {
   }
 
   private getStringValue(numberOfDigits: number): string {
-    return parseFloat(this.$refs.element.innerText).toFixed(this.digits);
+    return parseFloat(this.$refs.element.innerText).toFixed(numberOfDigits);
   }
 
   private getNumberValue(numberOfDigits: number): number {
@@ -43,7 +43,9 @@ export default class EditableAmount extends Vue {
   }
 
   private setValue(numberOfDigits: number) {
-    this.$refs.element.innerHTML = this.amount ? this.amount.toFixed() : "";
+    this.$refs.element.innerHTML = this.amount
+      ? this.amount.toFixed(numberOfDigits)
+      : "";
   }
 }
 </script>
