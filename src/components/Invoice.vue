@@ -94,7 +94,7 @@ export default class Invoice extends Vue {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .btn-side {
-  position: fixed;
+  position: absolute;
   right: 10px;
 }
 .loader {
