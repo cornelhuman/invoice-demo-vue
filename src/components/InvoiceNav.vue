@@ -4,7 +4,7 @@
       <div
         class="text-white nav-link"
         style="font-size:1.5em;font-weight:bold"
-      >Demo Invoice App (Vue.js)</div>
+      >Free Invoice Generator</div>
     </div>
     <button
       class="navbar-toggler"
@@ -27,8 +27,8 @@
         <a
           class="nav-link text-white"
           style="font-size:1.5em;font-weight:bold"
-          href="http://www.cornelhuman.com"
-        >CORNEL HUMAN</a>
+          href="https://www.pocketsme.com"
+        >Pocket SME</a>
         <button
           class="btn my-2 my-sm-0 text-white"
           style="font-size:20pt"
